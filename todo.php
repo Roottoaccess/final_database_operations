@@ -1,5 +1,5 @@
 <?php
-    require('db_config.php');
+require('db_config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,22 +27,29 @@
         padding: 5px;
     }
 
-    .input{
+    .input {
         padding: 8px;
         margin: 4px;
         border-radius: 6px;
         margin-right: 8px;
     }
 
-    .btn{
+    .btn {
         padding: 12px;
         margin: 8px;
         border-radius: 8px;
         border-color: blue;
     }
 
-    table{
+    table {
         border: 4px solid brown;
+    }
+
+    .btn1 {
+        padding: 12px;
+        margin: 8px;
+        border-radius: 8px;
+        border-color: red;
     }
 </style>
 
@@ -53,7 +60,7 @@
         </div>
         <br><br>
         <h3>
-            <form action="opertaion.php" method="post">
+            <form action="operation.php" method="post">
                 <table>
                     <tr>
                         <td>
@@ -104,6 +111,70 @@
                 </table>
             </form>
         </h3>
+        <br><br>
+        <div class="container">
+            <h2><b><i>Database_Records_Modify</i></b></h2>
+        </div>
+        <br><br>
+        <div>
+            <?php
+            # Writing the select query....
+            $sql = "select * from student";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($result)) { ?>
+                <form action="operation.php" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="id" value="<?php echo $row['id'] ?>" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="name">Names: </label>
+                            </th>
+                            <td>
+                                <input type="text" name="name" value="<?php echo $row['name']; ?>" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="email">Emails: </label>
+                            </th>
+                            <td>
+                                <input type="text" name="email" value="<?php echo $row['email']; ?>" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="department">Departments: </label>
+                            </th>
+                            <td>
+                                <input type="text" name="department" value="<?php echo $row['department']; ?>" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="text">Yourselfs: </label>
+                            </th>
+                            <td>
+                                <input type="text" name="text" value="<?php echo $row['text']; ?>" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="update" name="operation" class="btn1">
+                            </td>
+                            <th>
+                                <input type="submit" value="delete" name="operation" class="btn1">
+                            </th>
+                        </tr>
+                    </table>
+                    <br>
+                </form>
+            <?php }
+            ?>
+        </div>
     </center>
 </body>
 
