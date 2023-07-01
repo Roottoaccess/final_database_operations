@@ -4,7 +4,8 @@ require("db_config.php");
 
 # Writing the insertion code
 
-if($_POST){
+if($_POST)
+{
     if($_POST['operation'] == 'submit'){
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -20,7 +21,8 @@ if($_POST){
         }
         
     }
-    if($_POST['operation'] == 'delete'){
+    if($_POST['operation'] == 'delete')
+    {
         $id = $_POST['id'];
 
         # Writing the sql query to delete
@@ -29,10 +31,22 @@ if($_POST){
         if(mysqli_query($conn , $sql))
         {
             $location = "todo.php";
-            header("Location:$location);
+            header("Location:$location");
+        }
+    }
+    if($_POST['operation'] == 'update'){
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $department = $_POST['department'];
+        $text = $_POST['text'];
+
+        # Writing the sql query to update
+        $sql = "update student set name = '$name' , email = '$email' , department = '$department' , text = '$text' where id = $id";
+        if(mysqli_query($conn , $sql)){
+            $location = "todo.php";
+            header("Location:$location");
         }
     }
 }
-
-
 ?>
